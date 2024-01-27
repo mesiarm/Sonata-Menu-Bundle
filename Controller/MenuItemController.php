@@ -15,21 +15,14 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class MenuItemController extends Controller
 {
-
-    private $menuManager;
-    private $translator;
     private $routeGenerator;
     private $adminPool;
     private $entityManager;
 
-    public function __construct(MenuManager $menuManager,
-                                TranslatorInterface $translator,
-                                DefaultRouteGenerator $routeGenerator,
+    public function __construct(DefaultRouteGenerator $routeGenerator,
                                 Pool $adminPool,
                                 EntityManagerInterface $entityManager)
     {
-        $this->menuManager = $menuManager;
-        $this->translator = $translator;
         $this->routeGenerator = $routeGenerator;
         $this->adminPool = $adminPool;
         $this->entityManager = $entityManager;
@@ -68,7 +61,10 @@ class MenuItemController extends Controller
     {
         $response = parent::redirectTo($request, $object);
 
-        if (null !== $request->get('btn_update_and_list') || null !== $request->get('btn_create_and_list') || null !== $request->get('btn_update_and_edit') || strtoupper($request->getMethod()) === 'DELETE') {
+        if (null !== $request->get('btn_update_and_list') ||
+            null !== $request->get('btn_create_and_list') ||
+            null !== $request->get('btn_update_and_edit') ||
+            strtoupper($request->getMethod()) === 'DELETE') {
             $url = $this->admin->generateUrl('list');
 
             if(!empty($object) && $object instanceof MenuItemInterface) {
@@ -84,6 +80,5 @@ class MenuItemController extends Controller
 
         return $response;
     }
-
 
 }

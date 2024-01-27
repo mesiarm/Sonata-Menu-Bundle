@@ -5,7 +5,7 @@ services:
         autoconfigure: true
 
     prodigious_sonata_menu.factory:
-        class: Prodigious\Sonata\MenuBundle\Factory\MenuFactor
+        class: Prodigious\Sonata\MenuBundle\Factory\MenuFactory
 
     prodigious_sonata_menu.manager:
         class: Prodigious\Sonata\MenuBundle\Manager\MenuManager
@@ -27,17 +27,16 @@ services:
     prodigious_sonata_menu.admin.menu:
         class: '%sonata_menu.admins.menu%'
         tags:
-            - {  model_class: '%sonata_menu.entity.menu%', controller: Prodigious\Sonata\MenuBundle\Controller\MenuController,  name: sonata.admin, manager_type: orm, label: config.label_menu, group: config.label_menu, label_catalogue: ProdigiousSonataMenuBundle }
+            - {  model_class: '%sonata_menu.entity.menu%', controller: Prodigious\Sonata\MenuBundle\Controller\MenuController,  name: sonata.admin, manager_type: orm, label: config.label_menu, group: config.label_menu }
         calls:
             - [ setTranslationDomain, ['ProdigiousSonataMenuBundle']]
             - [ addChild, ['@prodigious_sonata_menu.admin.menu_item', 'menu']]
 
     prodigious_sonata_menu.admin.menu_item:
-        public: true
         class: '%sonata_menu.admins.menu_item%'
-        arguments: [~,  '%sonata_menu.entity.menu_item%', Prodigious\Sonata\MenuBundle\Controller\MenuItemController, '%sonata_menu.entity.menu%']
+        arguments: ["%sonata_menu.entity.menu%"]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: config.label_menu_item, group: config.label_menu, show_in_dashboard: false, label_catalogue: ProdigiousSonataMenuBundle }
+            - { name: sonata.admin, model_class: 'Prodigious\Sonata\MenuBundle\Entity\MenuItem', controller: Prodigious\Sonata\MenuBundle\Controller\MenuItemController, manager_type: orm, label: config.label_menu_item, group: config.label_menu, show_in_dashboard: false }
         calls:
             - [ setContainer, ['@service_container']]
             - [ setSlugify, ['@sonata.page.slugify.cocur']]
@@ -57,8 +56,6 @@ services:
 
     Prodigious\Sonata\MenuBundle\Controller\MenuItemController:
         arguments:
-            $menuManager: '@prodigious_sonata_menu.manager'
-            $translator: '@Symfony\Contracts\Translation\TranslatorInterface'
             $routeGenerator: '@Sonata\AdminBundle\Route\DefaultRouteGenerator'
             $adminPool: '@Sonata\AdminBundle\Admin\Pool'
         tags:

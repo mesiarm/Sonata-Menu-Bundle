@@ -84,7 +84,7 @@ class MenuManager
      */
     public function remove($menu)
     {
-        $menu = $this->menuRepository->remove($menu);
+        $this->menuRepository->remove($menu);
     }
 
     /**
@@ -152,14 +152,14 @@ class MenuManager
             if ($root === static::ITEM_ROOT && null !== $menuItem->getParent()
              || $root === static::ITEM_CHILD && null === $menuItem->getParent()
             ) {
-                return;
+                return null;
             }
 
             // Check status parameter
             if ($status === static::STATUS_ENABLED && !$menuItem->getEnabled()
              || $status === static::STATUS_DISABLED && $menuItem->getEnabled()
             ) {
-                return;
+                return null;
             }
 
             return $menuItem;
@@ -174,7 +174,7 @@ class MenuManager
      *
      * @return bool
      */
-    public function updateMenuTree($menu, $items, $parent=null)
+    public function updateMenuTree($menu, $items, $parent = null)
     {
         $update = false;
 
