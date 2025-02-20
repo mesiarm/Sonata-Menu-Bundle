@@ -18,14 +18,17 @@ class MenuItemController extends Controller
     private $routeGenerator;
     private $adminPool;
     private $entityManager;
+    private $menuManager;
 
     public function __construct(DefaultRouteGenerator $routeGenerator,
                                 Pool $adminPool,
-                                EntityManagerInterface $entityManager)
+                                EntityManagerInterface $entityManager,
+                                MenuManager $menuManager)
     {
         $this->routeGenerator = $routeGenerator;
         $this->adminPool = $adminPool;
         $this->entityManager = $entityManager;
+        $this->menuManager = $menuManager;
     }
     /**
      * @param integer $id

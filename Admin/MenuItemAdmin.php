@@ -3,6 +3,7 @@
 namespace Prodigious\Sonata\MenuBundle\Admin;
 
 use Prodigious\Sonata\MenuBundle\Entity\MenuItem;
+use Prodigious\Sonata\MenuBundle\Manager\MenuManager;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -58,6 +59,8 @@ class MenuItemAdmin extends AbstractAdmin
 
         $menu = $subject->getMenu();
 
+        $menuItems = [];
+
         if(!$menu) {
 
             if ($this->hasRequest()) {
@@ -75,6 +78,15 @@ class MenuItemAdmin extends AbstractAdmin
             }
         }
 
+        if ($this->hasRequest()) {
+            $menuItems =  $menu->getMenuItems()
+                ->filter(function($item){
+                $request = $this->getRequest();
+                return $item->getId() !== intval($request->attributes->get('childId'));
+            })
+                ->toArray();
+        }
+
         $form
             ->with('config.label_menu_item',['class' => 'col-md-6', 'translation_domain' => 'ProdigiousSonataMenuBundle'])
                 ->add('name', TextType::class,
@@ -90,6 +102,7 @@ class MenuItemAdmin extends AbstractAdmin
                         'label' => 'config.label_parent',
                         'required' => false,
                         'btn_add' => false,
+                        'choices' => $menuItems,
                         'placeholder' => 'config.label_select',
                     ],
                     [
@@ -109,21 +122,6 @@ class MenuItemAdmin extends AbstractAdmin
                     [
                         'label' => 'config.label_enabled',
                         'required' => false,
-                    ],
-                    [
-                        'translation_domain' => 'ProdigiousSonataMenuBundle'
-                    ]
-                )
-            ->end()
-
-            ->with('config.label_menu_link', ['class' => 'col-md-6', 'translation_domain' => 'ProdigiousSonataMenuBundle'])
-                ->add('menu', ModelType::class,
-                    [
-                        'label' => 'config.label_menu',
-                        'required' => false,
-                        'btn_add' => false,
-                        'data' => $menu,
-                        'placeholder' => 'config.label_select',
                     ],
                     [
                         'translation_domain' => 'ProdigiousSonataMenuBundle'
@@ -261,30 +259,6 @@ class MenuItemAdmin extends AbstractAdmin
             if(!empty($data)){
                 $object->setUrl($data);
             }
-        }
-        $this->updateUrl($object);
-    }
-
-    /**
-     * Update url
-     *
-     * @param Menuitem $object
-     */
-    public function updateUrl($object)
-    {
-        $url = $object->getUrl();
-
-        if(empty($url)) {
-            $url = $this->slugify->slugify(strip_tags($object->getName()));
-
-            if($object->hasParent()) {
-                $parent = $object->getParent();
-                $url = $parent->getUrl().'/'.$url;
-            }else {
-                $url = '/'.$url;
-            }
-
-            $object->setUrl($url);
         }
     }
 

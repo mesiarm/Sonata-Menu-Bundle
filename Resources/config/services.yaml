@@ -58,5 +58,6 @@ services:
         arguments:
             $routeGenerator: '@Sonata\AdminBundle\Route\DefaultRouteGenerator'
             $adminPool: '@Sonata\AdminBundle\Admin\Pool'
+            $menuManager: '@prodigious_sonata_menu.manager'
         tags:
             - { name: 'controller.service_arguments' }
