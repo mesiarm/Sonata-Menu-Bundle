@@ -6,13 +6,17 @@ use Prodigious\Sonata\MenuBundle\DependencyInjection\Compiler\DoctrineResolveTar
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
-use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 
 class ProdigiousSonataMenuBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         parent::build($container);
-        $container->addCompilerPass(new DoctrineResolveTargetEntityPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, 1000);
+
+        $container->addCompilerPass(
+            new DoctrineResolveTargetEntityPass(),
+            PassConfig::TYPE_BEFORE_OPTIMIZATION,
+            1000
+        );
     }
 }
