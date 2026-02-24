@@ -25,7 +25,7 @@
         "symfony/framework-bundle": "^7.4"
     },
     "autoload": {
-        "psr-4": { "Prodigious\\Sonata\\MenuBundle\\": "" }
+        "psr-4": { "Prodigious\\Sonata\\MenuBundle\\": "src/" }
     },
     "extra": {
         "branch-alias": {

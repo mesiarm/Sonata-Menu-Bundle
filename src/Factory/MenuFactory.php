@@ -3,6 +3,7 @@
 namespace Prodigious\Sonata\MenuBundle\Factory;
 
 use Prodigious\Sonata\MenuBundle\Model\MenuInterface;
+use Prodigious\Sonata\MenuBundle\Factory\MenuFactoryInterface;
 
 /**
  * Factory to create a menu

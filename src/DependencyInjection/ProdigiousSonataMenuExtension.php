@@ -2,6 +2,7 @@
 
 namespace Prodigious\Sonata\MenuBundle\DependencyInjection;
 
+use Prodigious\Sonata\MenuBundle\DependencyInjection\Configuration;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;

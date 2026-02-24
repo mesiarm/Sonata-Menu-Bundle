@@ -5,6 +5,8 @@ namespace Prodigious\Sonata\MenuBundle\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Prodigious\Sonata\MenuBundle\Model\MenuInterface;
+use Prodigious\Sonata\MenuBundle\Model\MenuItemInterface;
 
 /**
  * MenuItem
