@@ -5,8 +5,6 @@ namespace Prodigious\Sonata\MenuBundle\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Prodigious\Sonata\MenuBundle\Model\MenuInterface;
-use Prodigious\Sonata\MenuBundle\Model\MenuItemInterface;
 
 /**
  * MenuItem
@@ -82,7 +80,7 @@ abstract class MenuItem implements MenuItemInterface
     protected $children;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\Prodigious\Sonata\MenuBundle\Model\MenuInterface", inversedBy="menuItems")
+     * @ORM\ManyToOne(targetEntity="\Prodigious\Sonata\MenuBundle\Entity\Menu", inversedBy="menuItems")
      * @ORM\JoinColumn(name="menu", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     protected $menu;

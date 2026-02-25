@@ -40,20 +40,15 @@ class ProdigiousSonataMenuExtension extends Extension
      */
     protected function registerEntities(ContainerBuilder $container, array $config)
     {
-        if (isset($config['entities'])) {
+        $container->setParameter(
+            'sonata_menu.entity.menu',
+            $config['entities']['menu'] ?? Menu::class
+        );
 
-            if (isset($config['entities']['menu'])) {
-                $container->setParameter('sonata_menu.entity.menu', $config['entities']['menu']);
-            } else {
-                $container->setParameter('sonata_menu.entity.menu', Menu::class);
-            }
-
-            if (isset($config['entities']['menu_item'])) {
-                $container->setParameter('sonata_menu.entity.menu_item', $config['entities']['menu_item']);
-            } else {
-                $container->setParameter('sonata_menu.entity.menu_item', MenuItem::class);
-            }
-        }
+        $container->setParameter(
+            'sonata_menu.entity.menu_item',
+            $config['entities']['menu_item'] ?? MenuItem::class
+        );
 
         return $this;
     }

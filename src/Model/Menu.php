@@ -4,8 +4,6 @@ namespace Prodigious\Sonata\MenuBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Prodigious\Sonata\MenuBundle\Model\MenuInterface;
-use Prodigious\Sonata\MenuBundle\Model\MenuItemInterface;
 
 /**
  * Menu
@@ -31,7 +29,7 @@ abstract class Menu implements MenuInterface
     protected $alias;
 
     /**
-     * @ORM\OneToMany(targetEntity="\Prodigious\Sonata\MenuBundle\Model\MenuItemInterface", mappedBy="menu", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="\Prodigious\Sonata\MenuBundle\Entity\MenuItem", mappedBy="menu", cascade={"persist"})
      * @ORM\OrderBy({"position" = "ASC"})
      */
     protected $menuItems;

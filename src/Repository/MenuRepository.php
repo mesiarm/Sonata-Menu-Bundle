@@ -4,7 +4,6 @@ namespace Prodigious\Sonata\MenuBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Prodigious\Sonata\MenuBundle\Model\MenuInterface;
-use Prodigious\Sonata\MenuBundle\Model\MenuItemInterface;
 
 /**
  * MenuRepository
