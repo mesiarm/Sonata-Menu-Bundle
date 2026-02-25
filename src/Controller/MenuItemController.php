@@ -3,7 +3,6 @@
 namespace Prodigious\Sonata\MenuBundle\Controller;
 
 use Prodigious\Sonata\MenuBundle\Model\MenuItemInterface;
-use Prodigious\Sonata\MenuBundle\Manager\MenuManager;
 use Sonata\AdminBundle\Admin\Pool;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Sonata\AdminBundle\Route\DefaultRouteGenerator;

@@ -66,7 +66,7 @@ abstract class MenuItem implements MenuItemInterface
     /**
      * @var MenuItemInterface
      *
-     * @ORM\ManyToOne(targetEntity="\Prodigious\Sonata\MenuBundle\Model\MenuItemInterface", inversedBy="children", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="\Prodigious\Sonata\MenuBundle\Entity\MenuItem", inversedBy="children", cascade={"persist"})
      * @ORM\JoinColumn(name="parent", referencedColumnName="id", onDelete="SET NULL", nullable=true)
      */
     protected $parent;
@@ -74,7 +74,7 @@ abstract class MenuItem implements MenuItemInterface
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="\Prodigious\Sonata\MenuBundle\Model\MenuItemInterface", mappedBy="parent", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="\Prodigious\Sonata\MenuBundle\Entity\MenuItem", mappedBy="parent", cascade={"all"})
      * @ORM\OrderBy({"position" = "ASC"})
      */
     protected $children;
