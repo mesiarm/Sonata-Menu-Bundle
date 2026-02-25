@@ -9,7 +9,10 @@ services:
 
     prodigious_sonata_menu.manager:
         class: Prodigious\Sonata\MenuBundle\Manager\MenuManager
-        arguments: ["@doctrine.orm.entity_manager"]
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '%sonata_menu.entity.menu%'
+            - '%sonata_menu.entity.menu_item%'
         public: true
 
     prodigious_sonata_menu.repo:
